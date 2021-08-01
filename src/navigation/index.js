@@ -1,27 +1,55 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import TabBarBottom from './screens/tab-bar-bottom.js';
+import {Router} from './router';
+import {
+  Login,
+  Register,
+  HomeAuth,
+  ForgotPassword,
+} from '@features/auth/screens';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-function DetailsScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Deatil Screen</Text>
-    </View>
-  );
-}
 const Stack = createStackNavigator();
+
+const configTabOther = {
+  animation: 'timing',
+  config: {
+    duration: 300,
+  },
+};
+
 const AppNavigation = () => {
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator
+      headerMode="none"
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       <Stack.Screen name="TabBarBottom" component={TabBarBottom} />
+
+      {[
+        {name: Router.Login, component: Login},
+        {name: Router.Register, component: Register},
+        {name: Router.ForgotPassword, component: ForgotPassword},
+      ].map(stack => {
+        return (
+          <Stack.Screen
+            key={stack.name}
+            name={stack.name}
+            component={stack.component}
+            options={{
+              transitionSpec: {
+                open: configTabOther,
+                close: configTabOther,
+              },
+            }}
+          />
+        );
+      })}
     </Stack.Navigator>
   );
 };

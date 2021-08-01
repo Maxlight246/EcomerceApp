@@ -12,6 +12,7 @@ import {
 import {Theme} from '@common/theme';
 import {NavigationContainer} from '@react-navigation/native';
 import AppNavigation from './navigation';
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -20,6 +21,7 @@ const App = () => {
     <View style={{flex: 1, backgroundColor: Theme.backgrounds.white}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <AppNavigation />
+      <Toast ref={ref => Toast.setRef(ref)} />
     </View>
   );
 };

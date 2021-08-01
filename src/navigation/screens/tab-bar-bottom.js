@@ -5,6 +5,7 @@ import {Theme, WidthScreen, HeightScreen} from '@common/theme';
 import Icon from 'react-native-vector-icons/AntDesign';
 import TabBarIcon from '../components/tab-bar-icon';
 import {Router} from '../router';
+import {Profile} from '@features/auth/screens';
 
 function HomeScreen() {
   return (
@@ -83,7 +84,7 @@ const TabBarBottom = () => {
       />
       <Tab.Screen
         name={Router.Profile}
-        component={DetailsScreen}
+        component={Profile}
         showIcon={true}
         options={{
           tabBarIcon: ({focused}) => (
